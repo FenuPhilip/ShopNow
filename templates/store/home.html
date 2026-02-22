@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% block title %}ShopNow — Home{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section bg-dark text-white py-5">
+  <div class="container py-4">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <span class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill">🔥 New Arrivals Just In</span>
+        <h1 class="display-4 fw-bold mb-4">Discover <span class="text-warning">Amazing</span><br>Products Today</h1>
+        <p class="lead text-muted mb-4">Shop the latest trends with unbeatable prices. Free shipping on orders above ₹499.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="{% url 'product_list' %}" class="btn btn-warning btn-lg px-4">
+            <i class="bi bi-grid me-2"></i>Shop Now
+          </a>
+          <a href="{% url 'product_list' %}?sort=newest" class="btn btn-outline-light btn-lg px-4">
+            <i class="bi bi-stars me-2"></i>New Arrivals
+          </a>
+        </div>
+        <div class="row mt-4 g-3">
+          <div class="col-4 text-center">
+            <h4 class="fw-bold text-warning mb-0">10k+</h4>
+            <small class="text-muted">Products</small>
+          </div>
+          <div class="col-4 text-center">
+            <h4 class="fw-bold text-warning mb-0">50k+</h4>
+            <small class="text-muted">Customers</small>
+          </div>
+          <div class="col-4 text-center">
+            <h4 class="fw-bold text-warning mb-0">4.8★</h4>
+            <small class="text-muted">Rating</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center d-none d-lg-block">
+        <div class="hero-image-placeholder rounded-4 bg-secondary bg-opacity-25 d-flex align-items-center justify-content-center" style="height:380px;">
+          <i class="bi bi-bag-heart-fill text-warning" style="font-size:8rem;opacity:.5;"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature Badges -->
+<section class="py-3 bg-warning">
+  <div class="container">
+    <div class="row text-center g-3">
+      <div class="col-6 col-md-3"><i class="bi bi-truck me-2"></i><strong>Free Shipping</strong> above ₹499</div>
+      <div class="col-6 col-md-3"><i class="bi bi-arrow-counterclockwise me-2"></i><strong>Easy Returns</strong> 30 days</div>
+      <div class="col-6 col-md-3"><i class="bi bi-shield-check me-2"></i><strong>Secure</strong> Payments</div>
+      <div class="col-6 col-md-3"><i class="bi bi-headset me-2"></i><strong>24/7 Support</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories -->
+{% if categories %}
+<section class="py-5">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold mb-0">Shop by Category</h2>
+      <a href="{% url 'product_list' %}" class="btn btn-sm btn-outline-dark">View All <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="row g-3">
+      {% for category in categories %}
+      <div class="col-6 col-md-4 col-lg-2">
+        <a href="{% url 'category_products' category.slug %}" class="text-decoration-none">
+          <div class="card border-0 shadow-sm text-center p-3 h-100 category-card">
+            {% if category.image %}
+            <img src="{{ category.image.url }}" class="rounded-circle mx-auto mb-2" style="width:80px;height:80px;object-fit:cover;">
+            {% else %}
+            <div class="rounded-circle mx-auto mb-2 bg-warning bg-opacity-25 d-flex align-items-center justify-content-center" style="width:80px;height:80px;">
+              <i class="bi bi-tag-fill text-warning fs-3"></i>
+            </div>
+            {% endif %}
+            <h6 class="fw-semibold text-dark mb-0">{{ category.name }}</h6>
+            <small class="text-muted">{{ category.products.count }} items</small>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Featured Products -->
+{% if featured_products %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold mb-0">⭐ Featured Products</h2>
+      <a href="{% url 'product_list' %}" class="btn btn-sm btn-outline-dark">View All <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="row g-4">
+      {% for product in featured_products %}
+      {% include 'store/partials/product_card.html' %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Sale Products -->
+{% if on_sale %}
+<section class="py-5">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold mb-0">🔥 On Sale</h2>
+      <a href="{% url 'product_list' %}" class="btn btn-sm btn-danger">View All Deals</a>
+    </div>
+    <div class="row g-4">
+      {% for product in on_sale %}
+      {% include 'store/partials/product_card.html' %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- New Arrivals -->
+{% if new_arrivals %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold mb-0">🆕 New Arrivals</h2>
+      <a href="{% url 'product_list' %}?sort=newest" class="btn btn-sm btn-outline-dark">View All <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="row g-4">
+      {% for product in new_arrivals %}
+      {% include 'store/partials/product_card.html' %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Newsletter -->
+<section class="py-5 bg-dark text-white">
+  <div class="container text-center">
+    <h3 class="fw-bold mb-2">📩 Subscribe for Exclusive Deals</h3>
+    <p class="text-muted mb-4">Get the latest offers, product launches, and sale alerts straight to your inbox.</p>
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="input-group">
+          <input type="email" class="form-control form-control-lg" placeholder="Your email address">
+          <button class="btn btn-warning btn-lg">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

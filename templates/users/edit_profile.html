@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Edit Profile — ShopNow{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <h4 class="fw-bold mb-4">Edit Profile</h4>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h6 class="fw-semibold text-muted text-uppercase mb-3">Personal Info</h6>
+            <div class="row g-3 mb-4">
+              {% for field in user_form %}
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}<div class="text-danger small">{{ field.errors }}</div>{% endif %}
+              </div>
+              {% endfor %}
+            </div>
+            <h6 class="fw-semibold text-muted text-uppercase mb-3">Profile Details</h6>
+            {% for field in profile_form %}
+            <div class="mb-3">
+              <label class="form-label fw-semibold">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}<div class="text-danger small">{{ field.errors }}</div>{% endif %}
+            </div>
+            {% endfor %}
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-dark">Save Changes</button>
+              <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

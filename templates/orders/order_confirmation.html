@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Order Confirmed — ShopNow{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-7 text-center">
+      <div class="card border-0 shadow-lg rounded-4 p-5">
+        <div class="mb-4">
+          <i class="bi bi-check-circle-fill text-success" style="font-size:5rem;"></i>
+        </div>
+        <h2 class="fw-bold text-success mb-2">Order Placed!</h2>
+        <p class="text-muted mb-1">Thank you for your order</p>
+        <h4 class="fw-bold text-warning mb-4">{{ order.order_number }}</h4>
+        
+        <!-- Order Details -->
+        <div class="card border-0 bg-light mb-4 text-start">
+          <div class="card-body">
+            <div class="row g-2">
+              <div class="col-6">
+                <small class="text-muted">Order Date</small>
+                <p class="fw-semibold mb-0">{{ order.created_at|date:"M d, Y" }}</p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Status</small>
+                <p class="mb-0"><span class="badge bg-{{ order.get_status_badge_class }}">{{ order.get_status_display }}</span></p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Total</small>
+                <p class="fw-bold mb-0 text-warning">₹{{ order.total }}</p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Items</small>
+                <p class="fw-semibold mb-0">{{ order.item_count }} item(s)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shipping Info -->
+        <div class="text-start mb-4">
+          <h6 class="fw-bold">Delivering to:</h6>
+          <p class="text-muted mb-0">{{ order.shipping_name }}</p>
+          <p class="text-muted mb-0">{{ order.shipping_address_line1 }}, {{ order.shipping_city }}, {{ order.shipping_state }} {{ order.shipping_postal_code }}</p>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-center">
+          <a href="{% url 'order_detail' order.order_number %}" class="btn btn-dark">View Order Details</a>
+          <a href="{% url 'product_list' %}" class="btn btn-outline-dark">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

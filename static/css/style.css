@@ -1,0 +1,106 @@
+/* ===== SHOPNOW GLOBAL STYLES ===== */
+
+:root {
+  --primary: #212529;
+  --accent: #ffc107;
+  --light: #f8f9fa;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f5f5f5;
+}
+
+/* Product Cards */
+.product-card {
+  transition: transform .2s ease, box-shadow .2s ease;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.12) !important;
+}
+.product-card .card-img-top {
+  transition: transform .3s ease;
+}
+.product-card:hover .card-img-top {
+  transform: scale(1.04);
+}
+
+/* Category Cards */
+.category-card {
+  transition: transform .2s ease, box-shadow .2s ease;
+  border-radius: 12px !important;
+}
+.category-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.1) !important;
+}
+
+/* Hero */
+.hero-section {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 500px;
+}
+
+/* Buttons */
+.btn-warning {
+  font-weight: 600;
+}
+.btn-dark:hover {
+  background: #333;
+}
+
+/* Navbar */
+.navbar {
+  border-bottom: 2px solid #ffc107;
+}
+
+/* Cards general */
+.card {
+  border-radius: 12px !important;
+}
+
+/* Address select */
+.address-select:hover {
+  background: #fff3cd;
+  border-color: #ffc107 !important;
+}
+
+/* Rating stars */
+.bi-star-fill { color: #ffc107; }
+
+/* Cart badge */
+.badge.translate-middle {
+  font-size: 10px;
+}
+
+/* Alerts */
+.alert {
+  border-radius: 10px;
+}
+
+/* Form controls */
+.form-control:focus, .form-select:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 0 .2rem rgba(255,193,7,.25);
+}
+
+/* Pagination */
+.page-item.active .page-link {
+  background-color: #212529;
+  border-color: #212529;
+}
+.page-link { color: #212529; }
+.page-link:hover { color: #ffc107; }
+
+/* Footer links */
+footer a:hover { color: #ffc107 !important; }
+
+/* Tab borders */
+.nav-tabs .nav-link.active {
+  color: #212529;
+  font-weight: 600;
+  border-bottom-color: transparent;
+}
